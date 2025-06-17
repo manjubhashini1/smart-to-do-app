@@ -20,15 +20,15 @@ export default function InputBar() {
 
     return (
         //creating form to handle enter and button click
-        <div className="flex justify-between items-center mb-5 text-sm lg:text-lg">
+        <div className="w-full max-w-screen overflow-x-hidden mb-5 text-sm lg:text-lg">
             <form className="w-full" onSubmit={handleInput}>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center gap-x-5">
                     <input
                         type="text"
                         value={input}
                         placeholder="Add new task"
                         onChange={(e) => setInput(e.target.value)}
-                        className="w-[80%] lg:w-[90%]"
+                        className="w-full"
                     />
                     <button
                         type="submit"
