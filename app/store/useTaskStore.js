@@ -33,6 +33,10 @@ export const useTaskStore = create(persist(
         })),
         markAllCompleted: () => set(state => ({
             tasks: state.tasks.map(task => ({ ...task, isCompleted: true }))
+        })),
+
+        editTask: (id, newText) => set(state => ({
+            tasks: state.tasks.map(task => task.id === id ? {...task, text: newText } : task)
         }))
 
     }),
