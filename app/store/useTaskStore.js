@@ -7,7 +7,7 @@ export const useTaskStore = create(persist(
         tasks: [],
         addTask: (input) => set((state) => {
             const text = input.trim();
-            if (!text) return state; // ⛔ Prevent empty tasks
+            if (!text) return state; // Prevent empty tasks
             return {
                 tasks: [...state.tasks, { id: Date.now(), text, isCompleted: false }],
             };
