@@ -26,12 +26,12 @@ export default function TaskList() {
 
     if (!tasks) return null;
     return (
-        <div className="p-2">
-            <ul className="space-y-2">
+        <div className="tasklist-container">
+            <ul className="space-y-2 max-h-[600px] md:max-h-[800px] overflow-y-auto">
                 {tasks.map((task, index) => {
                     if (!task) return null;
                     return (
-                        <li className={`flex justify-between items-center border p-2 rounded mb-2 bg-white shadow cursor-move transition-all duration-150
+                        <li className={`flex justify-between items-center border text-sm lg:text-lg p-2 rounded mb-2 bg-white shadow cursor-move transition-all duration-150
             ${draggedIndex === index ? "opacity-80 scale-105" : ""}
             ${dragOverIndex === index && draggedIndex !== index ? "translate-y-1" : ""}
           `}
@@ -41,19 +41,21 @@ export default function TaskList() {
                             onDragEnter={() => handleDragEnter(index)} // to get index of if it is being dragged over another task
                             onDragEnd={handleDragEnd} // to reset the dragged index
                         >
-                            <button className="cursor-pointer text-4xl" onClick={() => toggleComplete(task.id)}>✔</button>
-                            <span className={`flex-1 ${task.isCompleted ? 'line-through text-red-500' : 'text-blue-700'}`}>{task.text}</span>
-                            <button className="cursor-pointer text-4xl" onClick={() => deleteTask(task.id)}>🗑</button>
+                            <button className="cursor-pointer text-4xl" onClick={() => toggleComplete(task.id)}>{task.isCompleted 
+                            ? <div className="relative mr-3"><span className="text-3xl">☐</span><span className="absolute top-0 left-0 text-green-500">✔</span></div> 
+                            : <div className="relative mr-3"><span className="text-3xl">☐</span></div>}</button>
+                            <span className={`flex-1 ${task.isCompleted ? 'line-through' : 'text-black'} cursor-text select-text`}>{task.text}</span>
+                            <button className="cursor-pointer text-4xl text-red-500" onClick={() => deleteTask(task.id)}>🗑</button>
                         </li>
                     );
                 })}
             </ul>
             {tasks.length > 0 && (
-            <div className="flex mt-4">
-                <button className="bg-blue-500 text-white px-4 py-2 mr-4 rounded" onClick={markAllCompleted}>Mark all as completed</button>
-                <button className="bg-blue-500 text-white px-4 py-2 mr-4 rounded" onClick={clearCompleted}>Clear completed</button>
-                <button className="bg-blue-500 text-white px-4 py-2 mr-4 rounded" onClick={clearTasks}>Clear All</button>
-            </div>
+                <div className="flex mt-4 gap-x-2">
+                    <button className="bg-blue-500 text-white text-sm lg:text-lg px-3 py-2 rounded" onClick={markAllCompleted}>Mark Completed</button>
+                    <button className="bg-blue-500 text-white text-sm lg:text-lg px-3 py-2 rounded" onClick={clearCompleted}>Clear Completed</button>
+                    <button className="bg-blue-500 text-white text-sm lg:text-lg px-3 py-2 rounded" onClick={clearTasks}>Clear All</button>
+                </div>
             )}
         </div>
     );
