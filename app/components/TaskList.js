@@ -51,7 +51,7 @@ export default function TaskList() {
     if (!tasks) return null;
     return (
         <div className="tasklist-container">
-            <ul className="space-y-2 max-h-[600px] md:max-h-[800px] overflow-y-auto">
+            <ul className="space-y-2 max-h-[500px] md:max-h-[650px] overflow-y-auto">
                 {tasks.map((task, index) => {
                     if (!task) return null;
                     const isEditing = editingId === task.id;
